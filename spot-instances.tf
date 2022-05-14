@@ -11,7 +11,6 @@ resource "aws_spot_instance_request" "nodes" {
   for_each                    = local.nodes
   ami                         = var.aws_ami
   instance_type               = var.aws_instance_type
-  user_data                   = file("init-script.sh")
   key_name                    = aws_key_pair.my-key.key_name
   wait_for_fulfillment        = true
   subnet_id                   = aws_subnet.cluster-subnet.id
@@ -29,7 +28,12 @@ resource "aws_spot_instance_request" "nodes" {
   }
 
   provisioner "remote-exec" {
-    inline = ["sudo hostnamectl set-hostname ${each.value.node_name}"]
+    inline = [
+      "sudo hostnamectl set-hostname ${each.value.node_name}",
+      "sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean all -y"
+    ]
+
+    on_failure = continue
 
     connection {
       type        = "ssh"
