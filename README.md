@@ -16,7 +16,7 @@ but you can use it to learn Kubernetes with a cluster with multiple nodes.
 3. Have installed or [install terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/oci-get-started).
 4. Have installed or [install AWS CLI ](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 5. Configure [AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html).
-6. Download this project and enter its folder `git clone https://github.com/HailsonJunior/terraform-aws-k8s.git && cd terraform-aws-k8s/`.
+6. Download this project and enter its folder `git clone https://github.com/HailsonJunior/terraform-k8s-aws.git && cd terraform-k8s-aws/`.
 7. `terraform init`
 8. `terraform apply`
 9. Export kubeconfig variable
