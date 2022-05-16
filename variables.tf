@@ -32,8 +32,3 @@ variable "aws_root_ebs_type" {
   type        = string
   default     = "gp2"
 }
-
-variable "availability_zone" {
-  type    = string
-  default = "us-east-2b"
-}
