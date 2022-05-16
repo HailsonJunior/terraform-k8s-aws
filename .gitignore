@@ -38,3 +38,5 @@ plan.tfout
 .terraform
 .terraform.lock.hcl
 kubeconfig
+id_rsa
+id_rsa.pub

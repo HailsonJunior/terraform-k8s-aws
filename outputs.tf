@@ -7,3 +7,10 @@ output "nodes_private_ips" {
 output "nodes_public_ips" {
   value = [for nodes in aws_spot_instance_request.nodes : nodes.public_ip]
 }
+
+output "ssh_command" {
+  value = (formatlist(
+    "ssh -i id_rsa ubuntu@%s",
+    [for nodes in aws_spot_instance_request.nodes : nodes.public_ip]
+  ))
+}
