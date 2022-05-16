@@ -1,4 +1,4 @@
-# Terraform AWS k8s
+# Terraform k8s AWS 
 
 This is a project to deploy a Kubernetes cluster on
 [AWS](https://aws.amazon.com/pt/) using Terraform.
