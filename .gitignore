@@ -37,3 +37,4 @@ tfplan.out
 plan.tfout
 .terraform
 .terraform.lock.hcl
+kubeconfig

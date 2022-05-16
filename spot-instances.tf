@@ -2,8 +2,9 @@ locals {
   nodes = {
     for i in range(1, 1 + var.how_many_nodes) :
     i => {
-      node_name = i == 1 ? format("k8s-node%d-master", i) : format("k8s-node%d-worker", i)
-      role      = i == 1 ? "controlplane" : "worker"
+      node_name  = i == 1 ? format("k8s-node%d-master", i) : format("k8s-node%d-worker", i)
+      ip_address = format("10.0.80.%d", 10 + i)
+      role       = i == 1 ? "controlplane" : "worker"
     }
   }
 }
@@ -16,6 +17,7 @@ resource "aws_spot_instance_request" "nodes" {
   wait_for_fulfillment        = true
   subnet_id                   = aws_subnet.cluster-subnet.id
   associate_public_ip_address = true
+  private_ip                  = each.value.ip_address
   vpc_security_group_ids      = [aws_security_group.cluster-sg.id]
   user_data                   = data.cloudinit_config._[each.key].rendered
 
@@ -41,7 +43,7 @@ resource "aws_spot_instance_request" "nodes" {
       user        = "ubuntu"
       host        = self.public_ip
       agent       = false
-      private_key = file(pathexpand("~/.ssh/id_rsa"))
+      private_key = local_file.ssh_private_key.filename
     }
   }
 
@@ -53,5 +55,5 @@ resource "aws_spot_instance_request" "nodes" {
 
 resource "aws_key_pair" "my-key" {
   key_name   = "my-key"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = join("\n", local.authorized_keys)
 }

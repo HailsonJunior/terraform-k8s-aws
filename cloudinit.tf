@@ -1,5 +1,6 @@
 locals {
   packages = [
+    "netfilter-persistent",
     "apt-transport-https",
     "build-essential",
     "ca-certificates",
