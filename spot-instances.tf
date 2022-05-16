@@ -2,7 +2,7 @@ locals {
   nodes = {
     for i in range(1, 1 + var.how_many_nodes) :
     i => {
-      node_name  = i == 1 ? format("k8s-master%d", i) : format("k8s-worker%d", i)
+      node_name  = i == 1 ? format("k8s-master%d", i) : format("k8s-worker%d", i - 1)
       ip_address = format("10.0.80.%d", 10 + i)
       role       = i == 1 ? "controlplane" : "worker"
     }
