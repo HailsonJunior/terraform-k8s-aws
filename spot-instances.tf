@@ -2,7 +2,8 @@ locals {
   nodes = {
     for i in range(1, 1 + var.how_many_nodes) :
     i => {
-      node_name = i == 1 ? format("k8s-node%d-master", i) : (i == 2 ? format("k8s-node%d-master", i) : format("k8s-node%d-worker", i))
+      node_name = i == 1 ? format("k8s-node%d-master", i) : format("k8s-node%d-worker", i)
+      role      = i == 1 ? "controlplane" : "worker"
     }
   }
 }
@@ -16,6 +17,7 @@ resource "aws_spot_instance_request" "nodes" {
   subnet_id                   = aws_subnet.cluster-subnet.id
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.cluster-sg.id]
+  user_data                   = data.cloudinit_config._[each.key].rendered
 
   root_block_device {
     volume_size           = var.aws_root_ebs_size
@@ -29,8 +31,7 @@ resource "aws_spot_instance_request" "nodes" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo hostnamectl set-hostname ${each.value.node_name}",
-      "sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean all -y"
+      "sudo hostnamectl set-hostname ${each.value.node_name}"
     ]
 
     on_failure = continue
