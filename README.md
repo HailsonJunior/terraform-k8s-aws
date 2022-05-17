@@ -60,4 +60,4 @@ AWS also has a managed Kubernetes service called
 
 ## References
 
-This project was made based on [ampernetacle](https://github.com/HailsonJunior/ampernetacle) project that has the same purpose but on Oracle Cloud.
+This project was made based on [ampernetacle](https://github.com/jpetazzo/ampernetacle) project that has the same purpose but on Oracle Cloud.
