@@ -46,11 +46,6 @@ resource "aws_spot_instance_request" "nodes" {
       private_key = local_file.ssh_private_key.filename
     }
   }
-
-  tags = {
-    "Name" = each.value.node_name
-  }
-
 }
 
 resource "aws_key_pair" "my-key" {
