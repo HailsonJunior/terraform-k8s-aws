@@ -14,3 +14,7 @@ output "ssh_command" {
     [for nodes in aws_spot_instance_request.nodes : nodes.public_ip]
   ))
 }
+
+output "variable_kubeconfig" {
+  value      = "Execute: 'export KUBECONFIG=$PWD/kubeconfig'"
+}
