@@ -16,5 +16,5 @@ output "ssh_command" {
 }
 
 output "variable_kubeconfig" {
-  value = "Execute: 'export KUBECONFIG=$PWD/kubeconfig'"
+  value = "export KUBECONFIG=$PWD/kubeconfig"
 }
