@@ -11,6 +11,8 @@ but you can use it to learn Kubernetes with a cluster with multiple nodes.
 
 ## Getting started
 
+If you are using Ubuntu Linux you can use the ```install.sh``` script for dependencies instalation of follow the instructions bellow.
+
 1. Create an AWS account ([this link](https://aws.amazon.com/pt/resources/create-account/)).
 2. Have installed or [install kubernetes](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl).
 3. Have installed or [install terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/oci-get-started).
